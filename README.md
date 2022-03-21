@@ -2,7 +2,7 @@
 
 PowerShell commandlet for parsing of 1C technological log.  
 
-Parsed event (TjEvent class) already contains commonly used properties without additional parsing actions rom user side 
+Parsed event (TjEvent class) already contains commonly used properties without additional parsing actions from user side 
 
 ## Usage example
 
