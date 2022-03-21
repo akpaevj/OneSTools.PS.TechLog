@@ -4,7 +4,7 @@
 
 PowerShell commandlet for parsing of 1C technological log.  
 
-Parsed event (TjEvent class) already contains commonly used properties that can be used without additional parsing actions from user side. All availabal properties can be found here: [TjEvent](https://github.com/akpaevj/OneSTools.PS.TechLog/blob/master/TjEvent.cs) 
+Parsed event (TjEvent class) already contains commonly used properties that can be used without additional parsing actions from user side. All available properties can be found here: [TjEvent](https://github.com/akpaevj/OneSTools.PS.TechLog/blob/master/TjEvent.cs) 
 
 ## Installation
 
