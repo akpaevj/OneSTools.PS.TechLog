@@ -1,5 +1,7 @@
 # OneSTools.PS.TechLog
 
+![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/OneSTools.PS.TechLog?style=plastic)
+
 PowerShell commandlet for parsing of 1C technological log.  
 
 Parsed event (TjEvent class) already contains commonly used properties without additional parsing actions from user side 
