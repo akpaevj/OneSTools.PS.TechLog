@@ -14,7 +14,7 @@ Install-Module -Name OneSTools.PS.TechLog
 
 ## Properties
 
-**Path** - array of path string (it can contains wildcard chars). Works like a *Path* property in Get-Item cmdlet
+**Path** - array of paths (it can contains wildcard chars). Works like a *Path* property in Get-Item cmdlet
 
 ## Usage example
 
