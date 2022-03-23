@@ -12,6 +12,10 @@ Parsed event (TjEvent class) already contains commonly used properties that can 
 Install-Module -Name OneSTools.PS.TechLog
 ```
 
+## Properties
+
+**Path** - array of path string (it can contains wildcard chars). Works like a *Path* property in Get-Item cmdlet
+
 ## Usage example
 
 Grouping by the first line of "Context" property:
