@@ -9,7 +9,7 @@ Parsed event (TjEvent class) already contains commonly used properties that can 
 ## Installation
 
 ```powershell
-Install-Module -Name OneSTools.PS.TechLog
+Install-Module OneSTools.PS.TechLog
 ```
 
 ## Properties
