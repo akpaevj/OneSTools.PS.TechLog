@@ -9,7 +9,7 @@ Parsed event (TjEvent class) already contains commonly used properties that can 
 ## Installation
 
 ```powershell
-Install-Module -Name OneSTools.PS.TechLog
+Install-Module OneSTools.PS.TechLog
 ```
 
 ## Properties
@@ -18,7 +18,7 @@ Install-Module -Name OneSTools.PS.TechLog
 
 ## Usage example
 
-Grouping by the first line of "Context" property:
+Calculating sum of duration and grouping by the first line of "Context" property:
 ```powershell
 Get-TechLog "C:\Users\akpaev.e\Desktop\*.log" | ForEach-Object { $aggr[$_.FirstContextLine] += $_.Duration }
 
