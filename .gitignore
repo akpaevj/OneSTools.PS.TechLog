@@ -10,6 +10,7 @@
 
 .vscode
 module/
+test.ps1
 
 # User-specific files
 *.rsuser
