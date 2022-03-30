@@ -30,7 +30,6 @@ Sort-Object Sum -Descending |
 Select-Object -First 10 |
 Format-Table -AutoSize
 ```
-
-that display such info:
+Example of output:
 
 ![Alt text](output.png)
