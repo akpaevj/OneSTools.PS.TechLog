@@ -5,7 +5,7 @@ function Group-TechLog {
         [Parameter(Mandatory=$true,
                    Position = 0,
                    ValueFromPipeline=$true)]
-        [psobject]$InputObject,
+        [System.Object]$InputObject,
 
         [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true)]
