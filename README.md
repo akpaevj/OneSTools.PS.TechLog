@@ -4,7 +4,7 @@
 
 PowerShell commandlet for parsing of 1C technological log.  
 
-This module includes `Get-TechLog` cmdlet and `Group-Techlog` function. `Get-TechLog` provides only single parameter (`Path`) that's typed of array of strings. This property works like a *Path* property in *Get-Item* cmdlet and can include wildcard chars as well. Parsed event (`TjEvent` class) already contains commonly used properties that can be used without additional parsing actions from user side. All available properties can be found here: [TjEvent](https://github.com/akpaevj/OneSTools.PS.TechLog/blob/master/TjEvent.cs). `Group-Techlog` just a function that can be used for grouping and getting aggregated values (sum, avg, count, min, max) by any numerable property.
+This module includes `Get-TechLog` cmdlet and `Group-Techlog` function. `Get-TechLog` provides single parameter (`Path`) that's typed of array of strings. This property works like a *Path* property in *Get-Item* cmdlet and can include wildcard chars as well. Parsed event (`TjEvent` class) already contains commonly used properties that can be used without additional parsing actions from user side. All available properties can be found here: [TjEvent](https://github.com/akpaevj/OneSTools.PS.TechLog/blob/master/TjEvent.cs). `Group-Techlog` just a function that can be used for grouping and getting aggregated values (sum, avg, count, min, max) by any numerable property.
 
 ## Get-TechLog
 ### Properties
