@@ -32,8 +32,8 @@ Sort-TechLog Duration -Top 10 -Descending
 
 # Group-TechLog
 ### Properties
-- **GroupProperty** - `TjEvent` property name that will be used for grouping  
-- **AggregationProperty** - `TjEvent` property name that will be used for calculating aggregated values
+- **GroupProperty (alias - GP)** - `TjEvent` property name that will be used for grouping  
+- **AggregationProperty (alias - AP)** - `TjEvent` property name that will be used for calculating aggregated values
 ### Example:
 ```powershell
 Get-TechLog "C:\techlog\*\*.log" |
