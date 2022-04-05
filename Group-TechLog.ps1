@@ -9,10 +9,12 @@ function Group-TechLog {
 
         [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true)]
+        [Alias("GP")]
         $GroupProperty,
         
         [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true)]
+        [Alias("AP")]
         $AggregationProperty
     )
 
