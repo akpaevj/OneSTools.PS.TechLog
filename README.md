@@ -26,8 +26,11 @@ Get-TechLog "C:\techlog\*\*.log"
 - **Descending** - Indicates that Sort-TechLog sorts the objects in descending order. The default is ascending order.
 ### Example:
 ```powershell
-Get-TechLog "C:\techlog\*\*.log" | 
-Sort-TechLog Duration -Top 10 -Descending
+Get-TechLog C:\techlog\*\*.log | 
+Where-Object LastContextLine -NE "" | 
+Sort-TechLog Duration -Descending -Top 10 | 
+Select-Object LastContextLine,Duration | 
+Format-Table -AutoSize
 ```
 ### Output:
 ![Sort-TechLog](screenshots/sort-techlog-output.png)
@@ -38,8 +41,9 @@ Sort-TechLog Duration -Top 10 -Descending
 - **AggregationProperty (alias - AP)** - `TjEvent` property name that will be used for calculating aggregated values
 ### Example:
 ```powershell
-Get-TechLog "C:\techlog\*\*.log" |
-Group-TechLog -GroupProperty FirstContextLine -AggregationProperty Duration
+Get-TechLog C:\techlog\*\*.log | 
+Group-TechLog -GP EventName -AP Duration | 
+Format-Table -AutoSize
 ```
 ### Output:
 ![Group-TechLog](screenshots/group-techlog-output.png)
