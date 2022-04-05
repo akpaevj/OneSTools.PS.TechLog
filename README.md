@@ -29,6 +29,8 @@ Get-TechLog "C:\techlog\*\*.log"
 Get-TechLog "C:\techlog\*\*.log" | 
 Sort-TechLog Duration -Top 10 -Descending
 ```
+### Output:
+![Sort-TechLog](screenshots/sort-techlog-output.png)
 
 # Group-TechLog
 ### Properties
@@ -39,3 +41,5 @@ Sort-TechLog Duration -Top 10 -Descending
 Get-TechLog "C:\techlog\*\*.log" |
 Group-TechLog -GroupProperty FirstContextLine -AggregationProperty Duration
 ```
+### Output:
+![Group-TechLog](screenshots/group-techlog-output.png)
