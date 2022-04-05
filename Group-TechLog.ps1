@@ -5,23 +5,23 @@ function Group-TechLog {
         [Parameter(Mandatory=$true,
                    Position = 0,
                    ValueFromPipeline=$true)]
-        [System.Object]$InputObject,
+        [psobject]$InputObject,
 
         [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true)]
-        [string]$GroupProperty,
+        $GroupProperty,
         
         [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true)]
-        [string]$AggregationProperty
+        $AggregationProperty
     )
 
     begin {
-        $inputObjects = New-Object 'Collections.Generic.Dictionary[string,object]'
+        $inputObjects = New-Object 'Collections.Generic.Dictionary[object,object]'
     }
 
     process {
-        $group = [string]$InputObject."$GroupProperty";
+        $group = $InputObject."$GroupProperty";
 
         if ([string]::IsNullOrEmpty($group)) { 
             return 
@@ -33,14 +33,8 @@ function Group-TechLog {
             $a = $inputObjects[$group];
             $a.Sum += $aggr;
             $a.Count += 1;
-
-            if ($aggr -lt $a.Min) {
-                $a.Min = $aggr
-            }
-
-            if ($aggr -gt $a.Max) {
-                $a.Max = $aggr
-            }
+            $a.Min = [math]::Min($a.Min, $aggr);
+            $a.Max = [math]::Max($a.Max, $aggr);
         }
         else {
             $inputObjects.Add($group, @{Sum = $aggr; Count = 1; Min = $aggr; Max = $aggr});

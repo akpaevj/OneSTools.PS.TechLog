@@ -7,10 +7,10 @@ using System.Text.RegularExpressions;
 
 namespace OneSTools.PS.TechLog
 {
-    class TjEvent
+    public class TjEvent
     {
         public DateTime DateTime{ get; set; } = DateTime.MinValue;
-        public int Duration { get; set; } = 0;
+        public long Duration { get; set; } = 0;
         public string EventName { get; set; } = "";
         public int Level { get; set; } = 0;
         public Dictionary<string, string> Properties { get; internal set; } = new Dictionary<string, string>();

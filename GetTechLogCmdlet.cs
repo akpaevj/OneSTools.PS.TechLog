@@ -9,7 +9,7 @@ namespace OneSTools.PS.TechLog
 {
     [Cmdlet(VerbsCommon.Get, "TechLog")]
     [OutputType(typeof(TjEvent))]
-    public class GetTechLogCmdletCommand : Cmdlet
+    public class GetTechLogCmdlet : Cmdlet
     {
         private readonly Dictionary<string, StreamReader> readers = new Dictionary<string, StreamReader>();
 
@@ -27,6 +27,8 @@ namespace OneSTools.PS.TechLog
             {
                 var reader = new StreamReader(logFile);
                 readers.Add(logFile, reader);
+
+                WriteDebug($"Reader for {logFile} is created");
             }
         }
         
@@ -39,6 +41,8 @@ namespace OneSTools.PS.TechLog
         {
             foreach (var kv in readers)
             {
+                WriteDebug($"Reading of {kv.Key} is started");
+                
                 StartReading(kv.Key, kv.Value);
             }
         }
@@ -98,7 +102,7 @@ namespace OneSTools.PS.TechLog
 
             var durationStart = 27;
             var durationEnd = eventData.IndexOf(',');
-            var duration = int.Parse(eventData.Substring(durationStart, durationEnd - durationStart));
+            var duration = long.Parse(eventData.Substring(durationStart, durationEnd - durationStart));
 
             var eventNameStart = durationEnd + 1;
             var eventNameEnd = eventData.IndexOf(',', eventNameStart + 1);
