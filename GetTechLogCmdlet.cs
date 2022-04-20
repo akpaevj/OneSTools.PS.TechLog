@@ -9,7 +9,7 @@ namespace OneSTools.PS.TechLog
 {
     [Cmdlet(VerbsCommon.Get, "TechLog")]
     [OutputType(typeof(TjEvent))]
-    public class GetTechLogCmdlet : Cmdlet
+    public class GetTechLogCmdlet : PSCmdlet
     {
         private readonly Dictionary<string, StreamReader> readers = new Dictionary<string, StreamReader>();
 
@@ -20,15 +20,25 @@ namespace OneSTools.PS.TechLog
         {
             var files = new List<string>();
 
-            foreach(var path in Path)
-                files.AddRange(GetFiles(path));
+            foreach(var path in Path) {
+                var p = path;
+
+                WriteDebug($"Getting files by path {p}");
+
+                if (!System.IO.Path.IsPathRooted(path)) {
+                    p = System.IO.Path.GetFullPath(System.IO.Path.Combine(SessionState.Path.CurrentLocation.ToString(), path));
+                    WriteDebug($"Full path is {p}");
+                }
+
+                files.AddRange(GetFiles(p));
+            }
 
             foreach (var logFile in files)
             {
+                WriteDebug($"Creating reader for the file by path {logFile}");
+
                 var reader = new StreamReader(logFile);
                 readers.Add(logFile, reader);
-
-                WriteDebug($"Reader for {logFile} is created");
             }
         }
         
