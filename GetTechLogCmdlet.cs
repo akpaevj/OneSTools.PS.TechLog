@@ -17,7 +17,7 @@ namespace OneSTools.PS.TechLog
         public string[] Path { get; set; }
 
         protected override void BeginProcessing()
-        {    
+        {
             var files = new List<string>();
 
             foreach(var path in Path)
