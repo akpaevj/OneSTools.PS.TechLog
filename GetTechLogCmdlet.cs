@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Management.Automation;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace OneSTools.PS.TechLog
 {
@@ -18,24 +19,16 @@ namespace OneSTools.PS.TechLog
 
         protected override void BeginProcessing()
         {
-            var files = new List<string>();
+            var allFiles = new List<string>();
 
             foreach(var path in Path) {
-                var p = path;
-
-                WriteDebug($"Getting files by path {p}");
-
-                if (!System.IO.Path.IsPathRooted(path)) {
-                    p = System.IO.Path.GetFullPath(System.IO.Path.Combine(SessionState.Path.CurrentLocation.ToString(), path));
-                    WriteDebug($"Full path is {p}");
-                }
-
-                files.AddRange(GetFiles(p));
+                var files = SessionState.Path.GetResolvedPSPathFromPSPath(path).Select(c => c.Path);
+                allFiles.AddRange(files);
             }
 
-            foreach (var logFile in files)
+            foreach (var logFile in allFiles)
             {
-                WriteDebug($"Creating reader for the file by path {logFile}");
+                WriteVerbose($"Creating reader for the file by path {logFile}");
 
                 var reader = new StreamReader(logFile);
                 readers.Add(logFile, reader);
@@ -51,7 +44,7 @@ namespace OneSTools.PS.TechLog
         {
             foreach (var kv in readers)
             {
-                WriteDebug($"Reading of {kv.Key} is started");
+                WriteVerbose($"Reading of {kv.Key} is started");
                 
                 StartReading(kv.Key, kv.Value);
             }
@@ -212,9 +205,7 @@ namespace OneSTools.PS.TechLog
         protected override void EndProcessing()
         {
             foreach(var reader in readers.Values)
-            {
                 reader?.Dispose();
-            }
 
             readers.Clear();
         }
@@ -222,72 +213,6 @@ namespace OneSTools.PS.TechLog
         public void EndProcessingInternal()
         {
             EndProcessing();
-        }
-
-        private string[] GetFiles(string path)
-        {
-            var result = new List<string>();
-
-            string[] pathParts = path.Split(System.IO.Path.DirectorySeparatorChar);
-
-            var dirs = GetDirectories("", pathParts.Take(pathParts.Length - 1).ToArray(), 0);
-            var filePattern = pathParts.Last();
-
-            foreach (var dir in dirs)
-            {
-                if (IsPattern(filePattern))
-                    result.AddRange(Directory.GetFiles(dir, filePattern));
-                else
-                {
-                    var p = System.IO.Path.Combine(dir, filePattern);
-
-                    if (File.Exists(p))
-                        result.Add(p);
-                }
-            }
-
-            return result.ToArray();
-        }
-
-        private bool IsPattern(string str)
-            => str.Contains('*') || str.Contains('?');
-
-        private string[] GetDirectories(string currentPath, string[] pathParts, int partIndex)
-        {
-            var result = new List<string>();
-
-            var currentPart = pathParts[partIndex];
-
-            if (string.IsNullOrEmpty(currentPath))
-            {
-                result.Add(currentPart + System.IO.Path.DirectorySeparatorChar);
-            }
-            else
-            {
-                if (IsPattern(currentPart))
-                    result.AddRange(Directory.GetDirectories(currentPath, currentPart));
-                else
-                {
-                    var p = System.IO.Path.Combine(currentPath, currentPart);
-
-                    if (Directory.Exists(p))
-                        result.Add(p);
-                }
-            }
-
-            if (partIndex == pathParts.Length - 1)
-                return result.ToArray();
-            else
-            {
-                var dirs = new List<string>();
-
-                foreach(var dir in result)
-                {
-                    dirs.AddRange(GetDirectories(dir, pathParts, partIndex + 1));
-                }
-
-                return dirs.ToArray();
-            }
         }
     }
 }
