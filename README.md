@@ -47,3 +47,6 @@ Format-Table -AutoSize
 ```
 ### Output:
 ![Group-TechLog](screenshots/group-techlog-output.png)
+
+### Output (no-format):
+![Group-TechLog](screenshots/sort-techlog-output-without-format.png)
