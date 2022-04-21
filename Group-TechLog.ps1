@@ -5,7 +5,7 @@ function Group-TechLog {
         [Parameter(Mandatory=$true,
                    Position = 0,
                    ValueFromPipeline=$true)]
-        [psobject]$InputObject,
+        [OneSTools.PS.TechLog.TjEvent]$InputObject,
 
         [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true)]
@@ -19,7 +19,15 @@ function Group-TechLog {
     )
 
     begin {
-        $inputObjects = New-Object 'Collections.Generic.Dictionary[object,object]'
+        $property = [OneSTools.PS.TechLog.TjEvent].GetProperty("$GroupProperty")
+        if ($null -eq $property) {
+            throw "TjEvent type doesn't contain property that's named $GroupProperty"
+        } else {
+            $propertyType = $property.PropertyType.FullName
+            Write-Verbose("Grouping property type is $propertyType")
+
+            $inputObjects = New-Object "Collections.Generic.Dictionary[$propertyType,object]"
+        }
     }
 
     process {
