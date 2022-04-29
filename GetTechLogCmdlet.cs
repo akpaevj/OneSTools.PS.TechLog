@@ -30,7 +30,8 @@ namespace OneSTools.PS.TechLog
             {
                 WriteVerbose($"Creating reader for the file by path {logFile}");
 
-                var reader = new StreamReader(logFile);
+                var stream = new FileStream(logFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                var reader = new StreamReader(stream);
                 readers.Add(logFile, reader);
             }
         }
