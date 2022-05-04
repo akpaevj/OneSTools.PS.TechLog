@@ -1,6 +1,6 @@
 # OneSTools.PS.TechLog
 
-![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/OneSTools.PS.TechLog?style=plastic)
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/OneSTools.PS.TechLog?style=plastic)](https://www.powershellgallery.com/packages/OneSTools.PS.TechLog)
 
 PowerShell commandlet for parsing of 1C technological log.  
 
